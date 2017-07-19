@@ -1,0 +1,61 @@
+-- .Modelo.Principal.Triangulo_Tartaglia
+----------------------------------------------
+-- Description	: 
+--
+-- Parameters	: 
+--
+-- Return value : 
+--
+-- Called By	: 
+----------------------------------------------
+/*
+Author	: 
+Date	: 
+
+History	: 
+______________________________________________
+*/
+is
+	Filas : Integer;
+	Resultado : Table;
+	Numerador : Integer;
+	Denominador : Integer;
+	incremento : integer;
+	nr : integer;
+	Valor_Base : Integer;
+do
+	Resultado.create;
+	
+	-- Fila en la que estoy parado
+	for Filas := 1 to 9 loop
+		
+		-- Para el primer caso
+		if Filas = 1 then
+			Resultado[1,Resultado.YDim + 1] := to_str(1);
+		else
+			  
+			Numerador := Filas - 1;
+			Valor_Base := Filas - 1;
+			Denominador := 1;
+			nr := Resultado.YDim + 1;
+			
+			-- Incremento de la que se va ir restando al numerador
+			for incremento := 0 to Filas - 1 loop
+				
+				-- cuando es cero guardo el uno
+				if incremento = 0 then
+					Resultado[incremento + 1,nr] := to_str(1);
+					
+				else
+					Resultado[incremento + 1,nr] := to_str(Numerador/(Denominador));
+					
+					-- actualicemos la variable numerador y denominador
+					Numerador := Numerador*(Valor_Base - Incremento);
+					Denominador := Denominador*(Incremento + 1);
+				end;
+			next;
+		end;
+		
+	next;
+
+end;
